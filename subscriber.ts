@@ -13,7 +13,12 @@ const run = async () => {
                 return;
             }
             console.log(message.content.toString())
-            // channel.ack(message) // acknowledge that the message has been received (MANUAL ACKNOWLEDGEMENT)
+            if(message.properties.replyTo) {
+                const {correlationId} = message.properties
+                channel.sendToQueue(message.properties.replyTo, Buffer.from(`I get your message with correlationId: ${correlationId}`), {
+                    correlationId
+                })
+            }
         }, {
             noAck: true // automatic acknowledgement
         })
