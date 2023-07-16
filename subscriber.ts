@@ -13,6 +13,7 @@ const run = async () => {
                 return;
             }
             console.log(message.content.toString())
+            channel.ack(message)
         })
     } catch (e) {
         console.error(e)
