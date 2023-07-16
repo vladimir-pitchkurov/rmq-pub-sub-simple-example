@@ -13,7 +13,9 @@ const run = async () => {
                 return;
             }
             console.log(message.content.toString())
-            channel.ack(message)
+            // channel.ack(message) // acknowledge that the message has been received (MANUAL ACKNOWLEDGEMENT)
+        }, {
+            noAck: true // automatic acknowledgement
         })
     } catch (e) {
         console.error(e)
